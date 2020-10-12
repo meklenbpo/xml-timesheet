@@ -1,0 +1,7 @@
+# Python stuff
+vnv
+*.pyc
+*.egg-info
+
+# MacOS stuff
+.DS_Store
