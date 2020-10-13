@@ -12,13 +12,13 @@ import conftest
 def test_random_dt_attribute_types_1():
     """Test that random_dt parameter 1 must be a datetime object, not
     string."""
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         conftest.random_dt('2010-01-01', dt.datetime(2010, 1, 1))
 
 def test_random_dt_attribute_types_2():
     """Test that random_dt parameter 2 must be a datetime object, not
     string."""
-    with pytest.raises(ValueError):
+    with pytest.raises(TypeError):
         conftest.random_dt(dt.datetime(2010, 1, 1), '2020-01-01')
 
 def test_random_dt_max_greater_min():
@@ -43,26 +43,42 @@ def test_random_name_type():
     name = conftest.random_name()
     assert isinstance(name, str)
 
-#conftest.random_record
-def test_random_record_output_type():
+#conftest.make_record
+def test_make_record_output_type():
     """Test if random_record outputs a string."""
-    rec = conftest.random_record()
+    rec = conftest.make_record('h.simpson', dt.datetime(2010,1,1,10,14,0), 
+                               dt.datetime(2010,1,1,16,0,0))
     assert isinstance(rec, str)
 
-def test_random_record_valid_xml():
+def test_make_record_valid_xml():
     """Test if random_record output produces valid XML"""
-    rec = conftest.random_record()
+    rec = conftest.make_record('h.simpson', dt.datetime(2010,1,1,10,14,0), 
+                               dt.datetime(2010,1,1,16,0,0))
     xml = ET.fromstring(rec)
 
-def test_random_record_root():
+def test_make_record_root():
     """Test if random record root is a <person> tag."""
-    rec = conftest.random_record()
+    rec = conftest.make_record('h.simpson', dt.datetime(2010,1,1,10,14,0), 
+                               dt.datetime(2010,1,1,16,0,0))
     xml = ET.fromstring(rec)
     assert xml.tag == 'person'
 
 @pytest.mark.parametrize("tag", ['start', 'end'])
-def test_random_record_has_tag(tag):
+def test_make_record_has_tag(tag):
     """Test if generated random record has the predefined XML tags."""
-    rec = conftest.random_record()
+    rec = conftest.make_record('h.simpson', dt.datetime(2010,1,1,10,14,0), 
+                               dt.datetime(2010,1,1,16,0,0))
     xml = ET.fromstring(rec)
     assert xml.find(tag) is not None
+
+#conftest.batch_of_records()
+def test_batch_length():
+    """Test if batch string length is at least 100 times greater than 
+    amount of it's components (avg. length of a record is 111 chars).
+    """
+    batch_s = conftest.batch_of_records(1000)
+    assert len(batch_s) > 100000
+
+#conftest.write_file is untested because it only produces side effects
+
+
