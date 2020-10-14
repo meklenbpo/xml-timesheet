@@ -48,7 +48,7 @@ def random_record() -> str:
     - a person must clock out not later than 12 hours after clock in.
     """
     start_time = random_dt(dt.datetime(2000, 1, 1, 0, 0, 0),
-                           dt.datetime(2019, 12, 31, 23, 59, 59))
+                           dt.datetime(2000, 1, 8, 23, 59, 59))
     end_time = random_dt(start_time, start_time + dt.timedelta(hours=12))
     record = make_record(random_name(), start_time, end_time)
     return record
@@ -65,14 +65,6 @@ def batch_of_records(num: int) -> str:
     for _ in range(num):
         batch_rec += random_record()
     return batch_rec
-
-def header():
-    """Return a header of xml file."""
-    return 
-
-def footer():
-    """Return a footer of an XML file."""
-    return 
 
 def write_file(filename: str, num_rec: int):
     """Generate and write a file of arbitrary size."""
