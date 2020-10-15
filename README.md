@@ -18,12 +18,25 @@ analyzing it, filtering it by date range and aggregating by date and
 ### Basic usage
 
 Query time-sheet data for aggregated totals of work time by date. 
-No filtering, no aggregation by person:
+No filtering, no break down by person:
 
 ```python
 import clock_in_clock_out as cc
 cc.query('./sample_data.xml')
 ```
+
+results in:
+```
+         date   time
+0  01-01-2000  53.95
+1  02-01-2000  65.84
+2  03-01-2000  91.91
+3  04-01-2000  51.05
+4  05-01-2000  56.09
+5  06-01-2000  84.83
+6  07-01-2000  92.99
+```
+
 
 ### Filtering by date range
 
@@ -38,7 +51,16 @@ ending before or on the specified date will be taken into account.
 
 ```python
 import clock_in_clock_out as cc
-cc.query('./sample_data.xml', start='01-01-2019', end='31-01-2019')
+cc.query('./sample_data.xml', start='01-01-2000', end='04-01-2000')
+```
+
+results in:
+```
+         date   time
+0  01-01-2000  53.95
+1  02-01-2000  65.84
+2  03-01-2000  91.91
+3  04-01-2000  51.05
 ```
 
 ### Break down by employee is enabled:
@@ -51,6 +73,21 @@ import clock_in_clock_out as cc
 cc.query('./sample_data.xml', names=True)
 ```
 
+results in:
+```
+          date    full_name   time
+0   01-01-2000  d.maksimova   3.98
+1   01-01-2000      e.osina   5.07
+2   01-01-2000   f.stepanov   3.58
+3   01-01-2000   i.nikolaev   2.58
+4   01-01-2000  k.germanova  10.91
+..         ...          ...    ...
+84  08-01-2000     s.ivanov   0.12
+85  08-01-2000    t.fedorov   6.07
+86  08-01-2000   t.tolstaya   6.76
+87  08-01-2000     v.petrov   1.21
+88  31-12-2018    h.simpson  10.00
+```
 
 ## Source Format
 
