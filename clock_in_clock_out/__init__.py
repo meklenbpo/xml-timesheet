@@ -1,1 +1,1 @@
-from .clock_in_clock_out import Storage
+from .clock_in_clock_out import query

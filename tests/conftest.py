@@ -31,8 +31,8 @@ def random_name() -> dt.datetime:
 def make_record(fname: str, start: dt.datetime, end: dt.datetime) -> str:
     """Generate a timesheet record in a predefined format, given the 
     input data."""
-    start_formatted = start.strftime('%Y-%m-%d %H:%M:%S')
-    end_formatted = end.strftime('%Y-%m-%d %H:%M:%S')
+    start_formatted = start.strftime('%d-%m-%Y %H:%M:%S')
+    end_formatted = end.strftime('%d-%m-%Y %H:%M:%S')
     record = (f'\t<person full_name="{fname}">\n'
               f'\t\t<start>{start_formatted}</start>\n'
               f'\t\t<end>{end_formatted}</end>\n'
