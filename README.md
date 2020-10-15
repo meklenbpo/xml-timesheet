@@ -46,6 +46,7 @@ provided:
 `start: str` - starting date in `%d-%m-%Y` format. If provided, only
 records starting on or later than specified date will be taken into
 account.
+
 `end: str` - ending date in `%d-%m-%Y` format. If provided, only records
 ending before or on the specified date will be taken into account.
 
