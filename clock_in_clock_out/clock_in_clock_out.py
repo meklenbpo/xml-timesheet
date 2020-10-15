@@ -44,7 +44,7 @@ def _init_xml(xml_filename: str) -> etree.iterparse:
     return xml
 
 def _extract_data_from_element(e: etree.Element) -> dict:
-    """Extract useful data from an XML Element."""
+    """Extract useful data from a single XML Element."""
     return {'full_name': e.get('full_name'),
             'start': e[0].text,
             'end': e[1].text}
@@ -71,9 +71,9 @@ def _get_batch(xml_filename: str, batch_size: int) -> tuple:
     yield batch
 
 def _time_str_diff(dt_str_1: str, dt_str_2: str) -> float:
-    """Take two strings representing the date/time object in predefined
-    format and calculate the time interval between them. Return the
-    interval as a decimal number of hours."""
+    """Calculate the time interval between two strings representing the
+    date/time object in a predefined format. Return the interval as a 
+    decimal number of hours."""
     dt_format = '%d-%m-%Y %H:%M:%S'
     dt1 = datetime.strptime(dt_str_1, dt_format)
     dt2 = datetime.strptime(dt_str_2, dt_format)
@@ -91,8 +91,8 @@ def _add_derivative_data(source_data: pd.DataFrame) -> pd.DataFrame:
 
 def _filter_data(dataset: pd.DataFrame, start_date: str, 
                  end_date:str) -> pd.DataFrame:
-    """Take an augmented Dataframe of time-sheet data and filter it by 
-    `date` column."""
+    """Filter an augmented Dataframe of time-sheet data by `date` 
+    column."""
     to_filter = dataset.copy()
     cols = list(to_filter.columns)
     fmt = '%d-%m-%Y'
@@ -104,8 +104,8 @@ def _filter_data(dataset: pd.DataFrame, start_date: str,
     return filtered[cols]
 
 def _aggregate_data(dataset: pd.DataFrame, include_names: bool) -> pd.DataFrame:
-    """Take a augmented DataFrame of time-sheet data and aggregate it on
-    `date` and (optionally) `full_name` columns."""
+    """Aggregate an augmented DataFrame of time-sheet data on `date` and
+    (optionally) `full_name` columns."""
     to_agg = dataset.copy()
     if include_names:
         return to_agg[['date', 'full_name', 'time']].\
