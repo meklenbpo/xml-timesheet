@@ -4,7 +4,7 @@ A test sub-suite to test XML generating fixture functionality.
 
 import datetime as dt
 import pytest
-import xml.etree.ElementTree as ET
+from lxml import etree as et
 
 import conftest
 
@@ -54,13 +54,13 @@ def test_make_record_valid_xml():
     """Test if random_record output produces valid XML"""
     rec = conftest.make_record('h.simpson', dt.datetime(2010,1,1,10,14,0), 
                                dt.datetime(2010,1,1,16,0,0))
-    xml = ET.fromstring(rec)
+    xml = et.fromstring(rec)
 
 def test_make_record_root():
     """Test if random record root is a <person> tag."""
     rec = conftest.make_record('h.simpson', dt.datetime(2010,1,1,10,14,0), 
                                dt.datetime(2010,1,1,16,0,0))
-    xml = ET.fromstring(rec)
+    xml = et.fromstring(rec)
     assert xml.tag == 'person'
 
 @pytest.mark.parametrize("tag", ['start', 'end'])
@@ -68,7 +68,7 @@ def test_make_record_has_tag(tag):
     """Test if generated random record has the predefined XML tags."""
     rec = conftest.make_record('h.simpson', dt.datetime(2010,1,1,10,14,0), 
                                dt.datetime(2010,1,1,16,0,0))
-    xml = ET.fromstring(rec)
+    xml = et.fromstring(rec)
     assert xml.find(tag) is not None
 
 #conftest.batch_of_records()

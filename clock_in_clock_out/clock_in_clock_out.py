@@ -3,6 +3,10 @@ clock_in_clock_out
 ------------------
 
 includes main functionality for clock_in_clock_out module.
+
+`query(xml_filename: str, start: str, end: str, names: bool):` is the
+only exposed function - it provides the ability to query an XML file for
+time-sheet data, filter and aggregate it.
 """
 
 from datetime import datetime
@@ -11,8 +15,7 @@ import pandas as pd
 
 
 def _schema() -> etree.XMLSchema:
-    """Prepare a predefined XML Schema and return it as etree.XMLSchema
-    object."""
+    """Generate etree.XMLSchema for the predefined time-sheet format."""
     s = b'''<?xml version="1.0" encoding="UTF-8" ?>
            <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
              <xs:element name="people">
@@ -35,15 +38,13 @@ def _schema() -> etree.XMLSchema:
     return etree.XMLSchema(xml)
 
 def _init_xml(xml_filename: str) -> etree.iterparse:
-    """Open and XML file with predefined settings and return it as an 
-    etree.iterparse object."""
+    """Open an XML file for iterative parsing."""
     xml = etree.iterparse(xml_filename, tag='person', schema=_schema(), 
                           events=('end',))
     return xml
 
 def _extract_data_from_element(e: etree.Element) -> dict:
-    """Extract useful data from XML Element and return it via a
-    dictionary."""
+    """Extract useful data from an XML Element."""
     return {'full_name': e.get('full_name'),
             'start': e[0].text,
             'end': e[1].text}
@@ -55,8 +56,7 @@ def _clear_element(e: etree.Element):
         del e.getparent()[0]
 
 def _get_batch(xml_filename: str, batch_size: int) -> tuple:
-    """Read a `batch_size` of records from an XML file and yield it as
-    a list of etree.Elements."""
+    """Read a `batch_size` of records from an XML file."""
     batch = []
     counter = 0
     for _, element in _init_xml(xml_filename):
@@ -82,8 +82,8 @@ def _time_str_diff(dt_str_1: str, dt_str_2: str) -> float:
     return hours
 
 def _add_derivative_data(source_data: pd.DataFrame) -> pd.DataFrame:
-    """Take a DataFrame of source data (full_name, start and end times)
-    and calculate derivative values: `date` and `time`."""
+    """Take a DataFrame of source time-sheet data (full_name, start and
+    end times) and calculate derivative values: `date` and `time`."""
     data = source_data.copy()
     data['date'] = data.start.str[:10]
     data['time'] = data.apply(lambda x: _time_str_diff(x.start, x.end), axis=1)
@@ -91,8 +91,8 @@ def _add_derivative_data(source_data: pd.DataFrame) -> pd.DataFrame:
 
 def _filter_data(dataset: pd.DataFrame, start_date: str, 
                  end_date:str) -> pd.DataFrame:
-    """Take a Dataframe of predefined structure and filter it by `date`
-    column."""
+    """Take an augmented Dataframe of time-sheet data and filter it by 
+    `date` column."""
     to_filter = dataset.copy()
     cols = list(to_filter.columns)
     fmt = '%d-%m-%Y'
@@ -104,8 +104,8 @@ def _filter_data(dataset: pd.DataFrame, start_date: str,
     return filtered[cols]
 
 def _aggregate_data(dataset: pd.DataFrame, include_names: bool) -> pd.DataFrame:
-    """Take a DataFrame of predefined structure and aggregate it on `date` and
-    (optionally) `full_name` columns. Return as a pandas DataFrame."""
+    """Take a augmented DataFrame of time-sheet data and aggregate it on
+    `date` and (optionally) `full_name` columns."""
     to_agg = dataset.copy()
     if include_names:
         return to_agg[['date', 'full_name', 'time']].\
@@ -115,7 +115,16 @@ def _aggregate_data(dataset: pd.DataFrame, include_names: bool) -> pd.DataFrame:
 
 def query(xml_filename: str, start: str = '01-01-1970', end: str = '31-12-2199',
           names: bool = False) -> pd.DataFrame:
-    """Extract working time data from XML file chunk by chunk."""
+    """
+    Read time-sheet data from XML file, filter and aggregate it.
+    
+    `query` is a wrapper function that walks through the process of:
+    - iteratively parsing an XML file,
+    - analyzing the source data,
+    - filtering time-sheet data by date range,
+    - aggregating time-sheet data by date and (optionally) by person,
+    - saving the results.
+    """
     results = pd.DataFrame()
     for batch in _get_batch(xml_filename, 10):
         data_df = pd.DataFrame(batch)
