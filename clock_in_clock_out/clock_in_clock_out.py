@@ -24,8 +24,8 @@ def _schema() -> etree.XMLSchema:
                    <xs:element name="person" maxOccurs="unbounded">
                      <xs:complexType>
                        <xs:sequence>
-                         <xs:element name="start" type="xs:string" minOccurs="0" maxOccurs="1"/>
-                         <xs:element name="end" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                         <xs:element name="start" type="xs:string" minOccurs="1" maxOccurs="1"/>
+                         <xs:element name="end" type="xs:string" minOccurs="1" maxOccurs="1"/>
                        </xs:sequence>
                        <xs:attribute name="full_name" type="xs:string" use="required"/>
                      </xs:complexType>

@@ -1,6 +1,60 @@
-# Тестовое задание
+# Clock In Clock Out
 
-Имеется xml-файл следующей структуры, описывающий дату и время приход-ухода человека.
+Clock-In-Clock-Out is a Python module that enables reading time-sheet
+data from XML files of pre-defined format (see Source Format below),
+analyzing it, filtering it by date range and aggregating by date and
+(optionally) person.
+
+## Features
+
+- Read time-sheet data from an XML file
+- Calculate total working time per date
+- Filter data by date range
+- Group data by person (optional)
+- Memory usage doesn't depend on source file size
+
+## Usage
+
+### Basic usage
+
+Query time-sheet data for aggregated totals of work time by date. 
+No filtering, no aggregation by person:
+
+```python
+import clock_in_clock_out as cc
+cc.query('./sample_data.xml')
+```
+
+### Filtering by date range
+
+To enable filtering by date range one of the two arguments must be
+provided:
+
+`start: str` - starting date in `%d-%m-%Y` format. If provided, only
+records starting on or later than specified date will be taken into
+account.
+`end: str` - ending date in `%d-%m-%Y` format. If provided, only records
+ending before or on the specified date will be taken into account.
+
+```python
+import clock_in_clock_out as cc
+cc.query('./sample_data.xml', start='01-01-2019', end='31-01-2019')
+```
+
+### Break down by employee is enabled:
+
+To enable break down by person optional `names` argument must be set to
+`True` (is `False` by default):
+
+```python
+import clock_in_clock_out as cc
+cc.query('./sample_data.xml', names=True)
+```
+
+
+## Source Format
+
+An example of source time-sheet XML file:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -17,13 +71,26 @@
 </people>
 ```
 
-Необходимо написать программу на Python, которая вычисляет общее время пребывания всех людей за каждое число.
+### Time-sheet XML Schema:
 
-Примечания:
-1. Сделать реализацию, потребление памяти которой не зависит от размера входного файла.
-2. Сделать возможность разбивки по работникам и фильтрации по интервалам дат (например, с 01-08-2020 по 31-08-2020).
-3. Можно использовать любой фреймворк.
-4. Продемонстрировать работу с помощью тестов.
-5. Обеспечить максимально простое развёртывание приложения (например docker-контейнер).
-6. Исходный код выложить на github или bitbucket.
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="people">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="person" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="start" type="xs:string" minOccurs="1" maxOccurs="1"/>
+              <xs:element name="end" type="xs:string" minOccurs="1" maxOccurs="1"/>
+            </xs:sequence>
+            <xs:attribute name="full_name" type="xs:string" use="required"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+```
 
