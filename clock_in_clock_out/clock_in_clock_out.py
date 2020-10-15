@@ -12,13 +12,29 @@ from datetime import datetime
 from lxml import etree
 import pandas as pd
 
-
 def schema() -> etree.XMLSchema:
-    """Load an XML validation schema from a predefined file and return
-    it as an lxml object that can be used for parsing."""
-    schema_filename = './data/time_data.xsd'
-    schema_doc = etree.parse(schema_filename)
-    return etree.XMLSchema(schema_doc)
+    """Prepare a predefined XML Schema and return it as etree.XMLSchema
+    object."""
+    s = b'''<?xml version="1.0" encoding="UTF-8" ?>
+           <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+             <xs:element name="people">
+               <xs:complexType>
+                 <xs:sequence>
+                   <xs:element name="person" maxOccurs="unbounded">
+                     <xs:complexType>
+                       <xs:sequence>
+                         <xs:element name="start" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                         <xs:element name="end" type="xs:string" minOccurs="0" maxOccurs="1"/>
+                       </xs:sequence>
+                       <xs:attribute name="full_name" type="xs:string" use="required"/>
+                     </xs:complexType>
+                   </xs:element>
+                 </xs:sequence>
+               </xs:complexType>
+             </xs:element>
+           </xs:schema>'''
+    xml = etree.XML(s)
+    return etree.XMLSchema(xml)
 
 def init_xml(xml_filename: str) -> etree.iterparse:
     """Open and XML file with predefined settings and return it as an 
