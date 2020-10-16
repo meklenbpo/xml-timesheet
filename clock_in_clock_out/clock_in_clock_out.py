@@ -12,7 +12,19 @@ time-sheet data, filter and aggregate it.
 from datetime import datetime
 from lxml import etree
 import pandas as pd
+import resource
 
+
+def _get_mem_usage() -> float:
+    """Measure current memory usage and return as decimal Mbs."""
+    mem = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    return round(mem/1024/1024, 2)
+
+def _log_mem_usage(log_filename: str):
+    """Save momentary memeory usage to a log file."""
+    with open(log_filename, 'w') as log:
+        timestamp = datetime.now().strftime('%D %T')
+        log.write(f'{timestamp}: {_get_mem_usage()} Mb.\n')
 
 def _schema() -> etree.XMLSchema:
     """Generate etree.XMLSchema for the predefined time-sheet format."""
@@ -132,4 +144,5 @@ def query(xml_filename: str, start: str = '01-01-1970', end: str = '31-12-2199',
         filtered_data = _filter_data(augm_data, start, end)
         results = results.append(filtered_data)
         results = _aggregate_data(results, names)
+        _log_mem_usage('./mem_log.log')
     return results

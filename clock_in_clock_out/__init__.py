@@ -28,3 +28,4 @@ date        person      time
 """
 
 from .clock_in_clock_out import query
+from .generate_sample_data import write_file
