@@ -7,11 +7,23 @@ implements generating sample data in predefined time-sheet format.
 `write_sample_file(filename: str, num_rec: int)` is the only exposed 
 method. It generates a sample file of the specified size (by number of
 records).
+
+generate_sample_data can also be run as a standalone module.
+
+Usage:
+
+./python generate_sample_data.py [filename] [number_of_records]
+
+Warning:
+
+Because it is a auxiliary script, arguments validation is not 
+implemented.
 """
 
 import datetime as dt
 import random
 from lxml import etree as et
+import sys
 
 
 def _random_dt(start: dt.datetime, end: dt.datetime) -> dt.datetime:
@@ -93,3 +105,11 @@ def write_sample_file(filename: str, num_rec: int):
         s = _batch_of_records(remainder)
         f.write(s)
         f.write(footer)
+
+
+if __name__ == '__main__':
+    filename = sys.argv[1]
+    num_of_recs = int(sys.argv[2])
+    print(f'Generating sample time-sheet data XML file: {filename}, '
+          f'with number of records: {num_of_recs}')
+    write_sample_file(filename, num_of_recs)

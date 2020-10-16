@@ -5,6 +5,8 @@ data from XML files of pre-defined format (see Source Format below),
 analyzing it, filtering it by date range and aggregating by date and
 (optionally) person.
 
+Clock-In-Clock-Out is also available as a CLI tool (see CLI Usage below).
+
 ## Features
 
 - Read time-sheet data from an XML file
@@ -90,6 +92,27 @@ results in:
 86  08-01-2000   t.tolstaya   6.76
 87  08-01-2000     v.petrov   1.21
 88  31-12-2018    h.simpson  10.00
+```
+
+## CLI Usage
+
+Command Line Interface is available by running scripts/runner.py. 
+The basic usage is as follows:
+
+```
+$ python scripts/runner.py -h
+usage: runner.py [-h] [--start START] [--end END] [--names] file
+
+Clock-In-Clock-Out: time-sheet analysis
+
+positional arguments:
+  file           source time-sheet file (.XML)
+
+optional arguments:
+  -h, --help     show this help message and exit
+  --start START  starting date filter in DD-MM-YYYY format
+  --end END      ending date filter in DD-MM-YYYY format
+  --names        a flag that provides data break down by person
 ```
 
 ## Source Format
