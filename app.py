@@ -3,22 +3,23 @@ A script that provides command-line interface to the
 Clock-In-Clock-Out module.
 
 Usage:
-./python app.py [-h] [--file SAMPLE.XML] [--start 01-01-2000]
-                [--end 01-01-2000] [--names]
+./python app.py [-h] [xml_filename SAMPLE.XML] [-s, --start 01-01-2000]
+                [-e, --end 01-01-2000] [-n, --names]
 
 Required parameters:
 
-file: - name of the source time-sheet file to query,
+xml_filename: - name of the source time-sheet file to query,
 
 Optional parameters:
 
---start:  - a starting date filter. Dates before specified date will not
-            be taken into account.
+-s, --start:  a starting date filter. Dates before specified date will
+              not be taken into account.
 
---end:    - an ending date filter. Dates after the specified date will 
-            not be taken into account.
+-e, --end:    an ending date filter. Dates after the specified date will
+              not be taken into account.
 
---names:  - if provided the time-records will be broken down by person.
+--names:      if provided the time-records will be broken down by 
+              person.
 """
 
 import argparse
@@ -59,11 +60,13 @@ def _parse_arguments():
 def main():
     """Top-level runner function.
     
-    Parse the command-line arguments into analysis function compatible
-    arguments dictionary, run the analysis function and display the 
-    results.
+    Parse the command-line arguments into a dictionary compatible with
+    analysis function API, call the analysis function on it and display
+    the results.
     """
+    # Parse arguments
     args = _parse_arguments()
+    # Run the analysis
     try:
         results = cc.query(**args)
     # Gracefully process fatal errors
@@ -73,8 +76,10 @@ def main():
     except etree.XMLSyntaxError:
         print(f'Error. Invalid XML (schema validation fails)')
         sys.exit(1)
+    # Display the results
     pd.set_option('display.max_rows', None)
     print(results)
+
 
 if __name__ == "__main__":
     main()

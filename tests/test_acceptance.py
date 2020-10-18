@@ -1,5 +1,10 @@
 """
-Tests that demonstarte the usage of the clock_in_clock_out module.
+
+Acceptance test suite:
+======================
+
+Tests that demonstarte the usage of the clock_in_clock_out module for
+the most important use-cases.
 """
 
 import os

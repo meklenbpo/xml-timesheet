@@ -1,9 +1,8 @@
 """
-Fixtures for the project's testing suite.
+Py.test fixtures for the project's testing suite.
 """
 
 from lxml import etree
-import os
 import pandas as pd
 import pytest
 

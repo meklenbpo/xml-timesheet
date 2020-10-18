@@ -2,7 +2,7 @@
 Clock In Clock Out
 ==================
 
-Clock-In-Clock-Out is a Python module for reading and analyzing time
+Clock-In-Clock-Out is a Python module for reading and analyzing time-
 sheet data in a predefined XML format.
 
 It can:
@@ -23,7 +23,7 @@ date        time
 Breaking down by person:
 
 >>> cc.query('sample.xml', start='01-01-2019', end='01-01-2019', names=True)
-date        person      time
+date        full_name   time
 01-01-2019  i.ivanov    6.1
 01-01-2019  s.tolstaya  6.0
 

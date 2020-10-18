@@ -5,9 +5,13 @@ generate_sample_data
 Auxiliary script that implements generating sample data in predefined 
 time-sheet format.
 
+API:
+
 `write_sample_file(filename: str, num_rec: int)` is the only exposed 
 method. It generates a sample file of the specified size (by number of
 records).
+
+Script:
 
 generate_sample_data can also be run as a standalone module.
 

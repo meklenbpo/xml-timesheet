@@ -2,7 +2,14 @@
 clock_in_clock_out
 ------------------
 
-includes main functionality for clock_in_clock_out module.
+includes main functionality for clock_in_clock_out module:
+
+- Read time sheet data from an XML file of predefined format,
+- Filter time sheet data by start and end date,
+- Aggregate data by date and (optionally) person,
+- Report the results as a pandas DataFrame.
+
+API:
 
 `query(xml_filename: str, start: str, end: str, names: bool):` is the
 only exposed function - it provides the ability to query an XML file for
@@ -50,7 +57,8 @@ def _extract_data_from_element(e: etree.Element) -> dict:
             'end': e[1].text}
 
 def _clear_element(e: etree.Element):
-    """Clear XML Element and delete references to its parents."""
+    """Clear XML Element and delete references to its parents to free
+    up memory."""
     e.clear()
     while e.getprevious() is not None:
         del e.getparent()[0]
@@ -117,16 +125,18 @@ def query(xml_filename: str, start: str = '01-01-1970',
           end: str = '31-12-2199', names: bool = False) -> pd.DataFrame:
     """
     Read time-sheet data from XML file, filter it and aggregate it, 
-    all **on-the-fly**.
+    **on-the-fly**, i.e.:
     
-    `query` is a wrapper function that walks through the process of:
-    - iteratively parsing an XML file,
-    - analyzing the source data,
-    - filtering time-sheet data by date range,
-    - aggregating time-sheet data by date and (optionally) by person,
-    - saving the results.
+    - load a batch of records from source file
+    - filter the loaded batch
+    - append filtered batch to results dataset
+    - aggregate the results with the appended data
+    
+    The results data set is stored in-memory, though steps have been
+    taken so that architecturally it is easy to implement storing it on
+    disk filesystem.
     """
-    # Set the defaults, so that Nones can be passed in via argparse
+    # Check that arguments are not None and set to default if required
     start = start if start else '01-01-1970'
     end = end if end else '31-12-2199'
     names = names if names else False
@@ -140,4 +150,5 @@ def query(xml_filename: str, start: str = '01-01-1970',
         filtered_data = _filter_data(augm_data, start, end)
         results = results.append(filtered_data)
         results = _aggregate_data(results, names)
+    # Export
     return results
