@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<people>
+	<person full_name="h.simpson">
+		<start>31-12-2018 20:00:00</start>
+		<end>01-01-2019 06:00:00</end>
+	</person>
+	<person full_name="f.osina">
+		<start>03-01-2000 02:36:30</start>
+		<end>03-01-2000 12:22:16</end>
+	</person>
+	<person full_name="f.maksimova">
+		<start>01-01-2000 02:27:43</start>
+		<end>01-01-2000 14:10:25</end>
+	</person>
+	<person full_name="e.losev">
+		<start>08-01-2000 17:17:13</start>
+		<end>08-01-2000 22:17:04</end>
+	</person>
+	<person full_name="n.alekseyev">
+		<start>01-01-2000 01:47:21</start>
+		<end>01-01-2000 11:49:56</end>
+	</person>
+	<person full_name="d.alekseyev">
+		<start>02-01-2000 10:56:47</start>
+		<end>02-01-2000 11:36:03</end>
+	</person>
+	<person full_name="f.klimova">
+		<start>04-01-2000 14:39:13</start>
+		<end>05-01-2000 02:08:35</end>
+	</person>
+	<person full_name="d.losev">
+		<start>07-01-2000 09:37:21</start>
+		<end>07-01-2000 16:59:36</end>
+	</person>
+	<person full_name="a.stepanov">
+		<start>02-01-2000 07:29:08</start>
+		<end>02-01-2000 18:15:59</end>
+	</person>
+	<person full_name="s.stepanov">
+		<start>08-01-2000 00:55:11</start>
+		<end>08-01-2000 05:24:43</end>
+	</person>
+	<person full_name="b.demyanenko">
+		<start>08-01-2000 09:44:02</start>
+		<end>08-01-2000 14:40:44</end>
+	</person>
+	<person full_name="t.bobrova">
+		<start>07-01-2000 00:00:13</start>
+		<end>07-01-2000 05:40:07</end>
+	</person>
+	<person full_name="f.losev">
+		<start>02-01-2000 14:30:14</start>
+		<end>02-01-2000 15:12:33</end>
+	</person>
+	<person full_name="e.fedorov">
+		<start>01-01-2000 01:40:50</start>
+		<end>01-01-2000 11:20:22</end>
+	</person>
+	<person full_name="d.evstigneeva">
+		<start>07-01-2000 20:01:04</start>
+		<end>07-01-2000 22:07:47</end>
+	</person>
+	<person full_name="i.evstigneeva">
+		<start>01-01-2000 15:28:05</start>
+		<end>02-01-2000 03:26:49</end>
+	</person>
+	<person full_name="v.klimova">
+		<start>08-01-2000 22:13:23</start>
+		<end>09-01-2000 04:11:02</end>
+	</person>
+	<person full_name="e.stepanov">
+		<start>04-01-2000 07:27:32</start>
+		<end>04-01-2000 11:45:57</end>
+	</person>
+	<person full_name="l.bobrova">
+		<start>01-01-2000 09:33:48</start>
+		<end>01-01-2000 21:31:58</end>
+	</person>
+	<person full_name="d.fedorov">
+		<start>06-01-2000 15:50:53</start>
+		<end>06-01-2000 18:59:23</end>
+	</person>
+	<person full_name="i.losev">
+		<start>08-01-2000 16:31:01</start>
+		<end>08-01-2000 20:25:43</end>
+	</person>
+	<person full_name="o.losev">
+		<start>08-01-2000 04:28:15</start>
+		<end>08-01-2000 08:45:19</end>
+	</person>
+	<person full_name="f.evstigneeva">
+		<start>01-01-2000 22:09:29</start>
+		<end>02-01-2000 02:16:36</end>
+	</person>
+	<person full_name="f.evstigneeva">
+		<start>05-01-2000 05:34:57</start>
+		<end>05-01-2000 16:39:22</end>
+	</person>
+	<person full_name="m.stepanov">
+		<start>01-01-2000 22:52:53</start>
+		<end>02-01-2000 06:03:02</end>
+	</person>
+	<person full_name="l.maksimova">
+		<start>02-01-2000 07:20:23</start>
+		<end>02-01-2000 07:28:09</end>
+	</person>
+	<person full_name="a.fedorov">
+		<start>07-01-2000 12:42:22</start>
+		<end>07-01-2000 23:55:38</end>
+	</person>
+	<person full_name="k.maksimova">
+		<start>03-01-2000 10:53:26</start>
+		<end>03-01-2000 13:17:07</end>
+	</person>
+	<person full_name="g.demyanenko">
+		<start>07-01-2000 11:05:16</start>
+		<end>07-01-2000 17:24:48</end>
+	</person>
+	<person full_name="g.germanova">
+		<start>05-01-2000 12:56:31</start>
+		<end>05-01-2000 20:03:10</end>
+	</person>
+	<person full_name="o.osina">
+		<start>05-01-2000 19:36:57</start>
+		<end>06-01-2000 05:18:36</end>
+	</person>
+	<person full_name="k.losev">
+		<start>07-01-2000 21:59:20</start>
+		<end>08-01-2000 00:39:33</end>
+	</person>
+	<person full_name="n.petrov">
+		<start>05-01-2000 11:18:43</start>
+		<end>05-01-2000 22:16:00</end>
+	</person>
+	<person full_name="v.germanova">
+		<start>03-01-2000 20:24:36</start>
+		<end>04-01-2000 05:59:23</end>
+	</person>
+	<person full_name="v.evstigneeva">
+		<start>08-01-2000 22:41:40</start>
+		<end>09-01-2000 02:50:43</end>
+	</person>
+	<person full_name="o.klimova">
+		<start>04-01-2000 12:32:54</start>
+		<end>05-01-2000 00:14:27</end>
+	</person>
+	<person full_name="v.osina">
+		<start>08-01-2000 20:57:30</start>
+		<end>09-01-2000 06:58:36</end>
+	</person>
+	<person full_name="a.ivanov">
+		<start>07-01-2000 18:22:56</start>
+		<end>08-01-2000 03:46:15</end>
+	</person>
+	<person full_name="m.bobrova">
+		<start>05-01-2000 06:55:25</start>
+		<end>05-01-2000 14:02:18</end>
+	</person>
+	<person full_name="r.demyanenko">
+		<start>02-01-2000 05:06:04</start>
+		<end>02-01-2000 15:14:22</end>
+	</person>
+	<person full_name="l.stepanov">
+		<start>01-01-2000 05:03:46</start>
+		<end>01-01-2000 07:54:24</end>
+	</person>
+	<person full_name="p.maksimova">
+		<start>05-01-2000 04:02:52</start>
+		<end>05-01-2000 08:05:20</end>
+	</person>
+	<person full_name="g.petrov">
+		<start>08-01-2000 04:07:29</start>
+		<end>08-01-2000 10:13:04</end>
+	</person>
+	<person full_name="t.ivanov">
+		<start>08-01-2000 14:23:58</start>
+		<end>08-01-2000 14:52:16</end>
+	</person>
+	<person full_name="t.stepanov">
+		<start>02-01-2000 00:10:15</start>
+		<end>02-01-2000 05:16:36</end>
+	</person>
+	<person full_name="l.ivanov">
+		<start>06-01-2000 01:26:10</start>
+		<end>06-01-2000 11:53:45</end>
+	</person>
+	<person full_name="k.nikolaev">
+		<start>08-01-2000 13:31:55</start>
+		<end>08-01-2000 18:00:08</end>
+	</person>
+	<person full_name="v.stepanov">
+		<start>08-01-2000 05:39:02</start>
+		<end>08-01-2000 09:23:48</end>
+	</person>
+	<person full_name="t.osina">
+		<start>02-01-2000 09:38:24</start>
+		<end>02-01-2000 09:57:19</end>
+	</person>
+	<person full_name="r.demyanenko">
+		<start>08-01-2000 18:11:16</start>
+		<end>08-01-2000 20:22:58</end>
+	</person>
+	<person full_name="b.klimova">
+		<start>03-01-2000 19:32:34</start>
+		<end>03-01-2000 23:08:54</end>
+	</person>
+</people>
