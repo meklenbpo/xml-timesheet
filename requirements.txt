@@ -1,6 +1,5 @@
 astroid==2.4.2
 attrs==20.2.0
--e git+https://github.com/meklenbpo/test_task_2gis@7beccfd695c56d8e34d078ed1b6c4a3556f2761c#egg=clock_in_clock_out
 iniconfig==1.0.1
 isort==5.6.3
 lazy-object-proxy==1.4.3

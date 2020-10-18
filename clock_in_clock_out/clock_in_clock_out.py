@@ -12,19 +12,7 @@ time-sheet data, filter and aggregate it.
 from datetime import datetime
 from lxml import etree
 import pandas as pd
-import resource
 
-
-def _get_mem_usage() -> float:
-    """Measure current memory usage and return as decimal Mbs."""
-    mem = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
-    return round(mem/1024/1024, 2)
-
-def _log_mem_usage(log_filename: str):
-    """Save momentary memeory usage to a log file."""
-    with open(log_filename, 'w') as log:
-        timestamp = datetime.now().strftime('%D %T')
-        log.write(f'{timestamp}: {_get_mem_usage()} Mb.\n')
 
 def _schema() -> etree.XMLSchema:
     """Generate etree.XMLSchema for the predefined time-sheet format."""
@@ -127,7 +115,8 @@ def _aggregate_data(dataset: pd.DataFrame, include_names: bool) -> pd.DataFrame:
 
 def query(xml_filename: str, start: str, end: str, names: bool) -> pd.DataFrame:
     """
-    Read time-sheet data from XML file, filter and aggregate it.
+    Read time-sheet data from XML file, filter it and aggregate it, 
+    all **on-the-fly**.
     
     `query` is a wrapper function that walks through the process of:
     - iteratively parsing an XML file,
@@ -136,14 +125,17 @@ def query(xml_filename: str, start: str, end: str, names: bool) -> pd.DataFrame:
     - aggregating time-sheet data by date and (optionally) by person,
     - saving the results.
     """
+    # Set the defaults, so that Nones can be passed in via argparse
     start = start if start else '01-01-1970'
     end = end if end else '31-12-2199'
+    # Init results dataset
     results = pd.DataFrame()
-    for batch in _get_batch(xml_filename, 10):
+    # Run 'on-the-fly' processing batch-by-batch
+    batch_size = 1000
+    for batch in _get_batch(xml_filename, batch_size):
         data_df = pd.DataFrame(batch)
         augm_data = _add_derivative_data(data_df)
         filtered_data = _filter_data(augm_data, start, end)
         results = results.append(filtered_data)
         results = _aggregate_data(results, names)
-        _log_mem_usage('./mem_log.log')
     return results
