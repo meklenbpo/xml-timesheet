@@ -6,7 +6,7 @@ import datetime as dt
 import pytest
 from lxml import etree as et
 
-import generate_sample_data as gsd
+from clock_in_clock_out import generate_sample_data as gsd
 
 
 def test_random_dt_attribute_types_1():

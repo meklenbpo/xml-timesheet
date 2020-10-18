@@ -113,7 +113,8 @@ def _aggregate_data(dataset: pd.DataFrame, include_names: bool) -> pd.DataFrame:
     else:
         return to_agg[['date', 'time']].groupby('date').sum().reset_index()
 
-def query(xml_filename: str, start: str, end: str, names: bool) -> pd.DataFrame:
+def query(xml_filename: str, start: str = '01-01-1970', 
+          end: str = '31-12-2199', names: bool = False) -> pd.DataFrame:
     """
     Read time-sheet data from XML file, filter it and aggregate it, 
     all **on-the-fly**.
@@ -128,6 +129,7 @@ def query(xml_filename: str, start: str, end: str, names: bool) -> pd.DataFrame:
     # Set the defaults, so that Nones can be passed in via argparse
     start = start if start else '01-01-1970'
     end = end if end else '31-12-2199'
+    names = names if names else False
     # Init results dataset
     results = pd.DataFrame()
     # Run 'on-the-fly' processing batch-by-batch

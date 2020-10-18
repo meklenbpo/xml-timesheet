@@ -2,7 +2,8 @@
 generate_sample_data
 --------------------
 
-implements generating sample data in predefined time-sheet format.
+Auxiliary script that implements generating sample data in predefined 
+time-sheet format.
 
 `write_sample_file(filename: str, num_rec: int)` is the only exposed 
 method. It generates a sample file of the specified size (by number of
@@ -71,13 +72,6 @@ def _random_record() -> str:
     record = _make_record(_random_name(), start_time, end_time)
     return record
 
-def _control_record() -> str:
-    """Return a predefined record to be used as a control case for
-    acceptance test scenario.
-    """
-    return _make_record('h.simpson', dt.datetime(2018, 12, 31, 20, 0, 0),
-                        dt.datetime(2019, 1, 1, 6, 0, 0))
-
 def _batch_of_records(num: int) -> str:
     """Generate a `num` of records and return them as a single str."""
     batch_rec = ''
@@ -98,7 +92,6 @@ def write_sample_file(filename: str, num_rec: int):
     footer = '</people>'
     with open(filename, 'w') as f:
         f.write(header)
-        f.write(_control_record())
         for _ in range(num_batches):
             s = _batch_of_records(batch_size)
             f.write(s)

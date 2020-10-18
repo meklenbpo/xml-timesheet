@@ -23,6 +23,7 @@ Optional parameters:
 
 import argparse
 from datetime import datetime
+from lxml import etree
 import pandas as pd
 import sys
 
@@ -65,8 +66,12 @@ def main():
     args = _parse_arguments()
     try:
         results = cc.query(**args)
+    # Gracefully process fatal errors
     except FileNotFoundError:
         print(f'Error. File {args["xml_filename"]} not found.')
+        sys.exit(1)
+    except etree.XMLSyntaxError:
+        print(f'Error. Invalid XML (schema validation fails)')
         sys.exit(1)
     pd.set_option('display.max_rows', None)
     print(results)
