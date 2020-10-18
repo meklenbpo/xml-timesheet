@@ -2,6 +2,7 @@
 vnv
 *.pyc
 *.egg-info
+.pytest_cache
 
 # MacOS stuff
 .DS_Store

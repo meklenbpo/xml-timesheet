@@ -6,10 +6,9 @@ import datetime as dt
 import pytest
 from lxml import etree as et
 
-import conftest
 import generate_sample_data as gsd
 
-# conftest.random_dt tests
+
 def test_random_dt_attribute_types_1():
     """Test that random_dt parameter 1 must be a datetime object, not
     string."""
@@ -38,13 +37,11 @@ def test_random_dt_output_less_than():
     rd = gsd._random_dt(dt.datetime(2012, 2, 1), dt.datetime(2014, 7, 5))
     assert rd <= dt.datetime(2014, 7, 5, 23, 59, 59)
 
-#conftest.random_name
 def test_random_name_type():
     """Test for type of random_name output."""
     name = gsd._random_name()
     assert isinstance(name, str)
 
-#conftest.make_record
 def test_make_record_output_type():
     """Test if random_record outputs a string."""
     rec = gsd._make_record('h.simpson', dt.datetime(2010,1,1,10,14,0), 
@@ -72,14 +69,11 @@ def test_make_record_has_tag(tag):
     xml = et.fromstring(rec)
     assert xml.find(tag) is not None
 
-#conftest.batch_of_records()
 def test_batch_length():
     """Test if batch string length is at least 100 times greater than 
     amount of it's components (avg. length of a record is 111 chars).
     """
     batch_s = gsd._batch_of_records(1000)
     assert len(batch_s) > 100000
-
-#conftest.write_file is untested because it only produces side effects
 
 

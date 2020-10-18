@@ -7,6 +7,7 @@ import pytest
 
 from generate_sample_data import write_sample_file
 
+
 @pytest.fixture
 def small_xml():
     """A pytest fixture that generates a small sample XML dataset."""

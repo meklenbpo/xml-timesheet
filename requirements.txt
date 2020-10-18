@@ -1,0 +1,21 @@
+astroid==2.4.2
+attrs==20.2.0
+-e git+https://github.com/meklenbpo/test_task_2gis@7beccfd695c56d8e34d078ed1b6c4a3556f2761c#egg=clock_in_clock_out
+iniconfig==1.0.1
+isort==5.6.3
+lazy-object-proxy==1.4.3
+lxml==4.5.2
+mccabe==0.6.1
+numpy==1.19.2
+packaging==20.4
+pandas==1.1.3
+pluggy==0.13.1
+py==1.9.0
+pylint==2.6.0
+pyparsing==2.4.7
+pytest==6.1.1
+python-dateutil==2.8.1
+pytz==2020.1
+six==1.15.0
+toml==0.10.1
+wrapt==1.12.1

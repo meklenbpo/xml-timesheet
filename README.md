@@ -96,23 +96,46 @@ results in:
 
 ## CLI Usage
 
-Command Line Interface is available by running scripts/runner.py. 
-The basic usage is as follows:
+Command Line Interface is available by running ./app.py:
 
 ```
-$ python scripts/runner.py -h
-usage: runner.py [-h] [--start START] [--end END] [--names] file
+$ python app.py -h
+
+==================
+Clock-In-Clock-Out
+==================
+
+Time-sheet analysis software
+----------------------------
+usage: app.py [-h] [-s START] [-e END] [-n] xml_filename
 
 Clock-In-Clock-Out: time-sheet analysis
 
 positional arguments:
-  file           source time-sheet file (.XML)
+  xml_filename          source time-sheet file (.XML)
 
 optional arguments:
-  -h, --help     show this help message and exit
-  --start START  starting date filter in DD-MM-YYYY format
-  --end END      ending date filter in DD-MM-YYYY format
-  --names        a flag that provides data break down by person
+  -h, --help            show this help message and exit
+  -s START, --start START
+                        starting date filter in DD-MM-YYYY format
+  -e END, --end END     ending date filter in DD-MM-YYYY format
+  -n, --names           a flag that provides data break down by person
+```
+
+Examples:
+
+```
+$ python app.py sample_data.xml
+...
+
+$ python app.py sample_data.xml --names
+...
+
+$ python app.py sample_data.xml --start 01-01-2000 --end 02-01-2000
+...
+
+$ python app.py sample_data.xml -s01-01-2000 -e31-12-2008 -n
+...
 ```
 
 ## Source Format
