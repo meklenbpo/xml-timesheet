@@ -90,7 +90,7 @@ Any other arguments can be applied to mounted data files as well:
 $ docker run -v /path/to/local/file/:/app/data meklenbpo/xml_timesheet data/timesheet.xml -s01-01-2000 --end 04-01-2000 --names
 ```
 
-Docker app can also be used to generate random sample data, like so 
+Docker app can also be used to generate random sample data. Doing so will require to override the container ENTRYPOINT like so 
 (*generating a random dataset of 50 records, stored as sample.xml*):
 
 ```
@@ -102,7 +102,7 @@ Generating sample time-sheet data XML file: sample.xml, with number of records: 
 
 ### Python library
 
-Once all the dependencies (lxml and pandas, see requirements.txt for more details) are in place Clock-In-Clock-Out library can be used by simply importing main module. See the examples below:
+Once all the dependencies (`lxml` and `pandas`, see [requirements.txt](./requirements.txt) for more details) are in place Clock-In-Clock-Out library can be used by simply importing main module. See the examples below:
 
 #### Basic query, no filtering, no break down by person:
 
