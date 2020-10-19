@@ -3,21 +3,21 @@
 Clock-In-Clock-Out is a Python library and an application that enables reading time-sheet data from XML files of pre-defined format (see Source Format below), analyzing it, filtering it by date range and aggregating by date and (optionally) person.
 
 **Table of Contents**
-[Features](#features)
 
-[Usage](#usage)
+1. [Features](#features)
 
-[Docker container app](##docker usage)
+2. [Usage](#usage)
 
-[Python library](##python)
+3. [Docker container app](##docker usage)
 
-[Python CLI script](##cli)
+4. [Python library](##python)
 
-[Testing](#testing)
+5. [Python CLI script](##cli)
 
-[Additional information](#additional)
-- Source data format reference
-- Timesheet XML Schema
+6. [Testing](#testing)
+
+7. [Additional information](#additional)
+
 
 ## Features
 
