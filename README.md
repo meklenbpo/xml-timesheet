@@ -1,8 +1,6 @@
 # Clock In Clock Out
 
-Clock-In-Clock-Out is a Python module and an application that enables reading time-sheet data from XML files of pre-defined format (see Source Format below), analyzing it, filtering it by date range and aggregating by date and (optionally) person.
-
-Clock-In-Clock-Out is also available as a CLI tool (see CLI Usage below).
+Clock-In-Clock-Out is a Python library and an application that enables reading time-sheet data from XML files of pre-defined format (see Source Format below), analyzing it, filtering it by date range and aggregating by date and (optionally) person.
 
 ## Features
 
@@ -11,6 +9,7 @@ Clock-In-Clock-Out is also available as a CLI tool (see CLI Usage below).
 - Filter data by date range
 - Group data by person (optional)
 - Memory usage doesn't depend on source file size
+- Generate random sample data files
 
 ## Usage
 
@@ -75,6 +74,15 @@ $ docker run -v /path/to/local/file/:/app/data meklenbpo/xml_timesheet data/time
 Any other arguments can be applied to mounted data files as well:
 ```
 $ docker run -v /path/to/local/file/:/app/data meklenbpo/xml_timesheet data/timesheet.xml -s01-01-2000 --end 04-01-2000 --names
+```
+
+Docker app can also be used to generate random sample data, like so 
+(*generating a random dataset of 50 records, stored as sample.xml*):
+
+```
+$ docker run --entrypoint "python3" meklenbpo/xml_timesheet "clock_in_clock_out/generate_sample_data.py" "sample.xml" 50
+
+Generating sample time-sheet data XML file: sample.xml, with number of records: 50
 ```
 
 
@@ -192,6 +200,12 @@ $ python app.py sample_data.xml --start 01-01-2000 --end 02-01-2000
 $ python app.py sample_data.xml -s01-01-2000 -e31-12-2008 -n
 ...
 ```
+
+A separate `generate_sample_data.py` script is available for generating random sample data files. The usage is as follows:
+```
+$ python clock_in_clock_out/generate_sample_data.py .sample_data.xml 50
+```
+This will generate a new random sample data file *sample_data.xml* with 50 random records in it.
 
 ## Testing
 
