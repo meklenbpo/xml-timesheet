@@ -15,6 +15,8 @@ Clock-In-Clock-Out is a Python library and an application that enables reading t
 
 ## Features
 
+Clock-In-Clock-Out app has the following features:
+
 - Read time-sheet data from an XML file
 - Calculate total working time per date
 - Filter data by date range
