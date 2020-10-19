@@ -1,9 +1,6 @@
 # Clock In Clock Out
 
-Clock-In-Clock-Out is a Python module that enables reading time-sheet
-data from XML files of pre-defined format (see Source Format below),
-analyzing it, filtering it by date range and aggregating by date and
-(optionally) person.
+Clock-In-Clock-Out is a Python module and an application that enables reading time-sheet data from XML files of pre-defined format (see Source Format below), analyzing it, filtering it by date range and aggregating by date and (optionally) person.
 
 Clock-In-Clock-Out is also available as a CLI tool (see CLI Usage below).
 
