@@ -27,9 +27,10 @@ Clock-In-Clock-Out app has the following features:
 ## Usage
 
 Clock-In-Clock-Out module can be used in three principal ways:
-1. as a Docker container packaged app
-2. as a Python standalone script
-3. as a Python library
+1. as a [Docker container packaged app](#docker-usage)
+2. as a [Python library](#python-library)
+3. as a [Python standalone script](#cli-usage)
+
 Please see details below:
 
 ### Docker usage
