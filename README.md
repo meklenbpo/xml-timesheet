@@ -42,7 +42,6 @@ Docker container includes a sample dataset for testing purposes `sample_data.xml
 
 ```
 $ docker run meklenbpo/xml_timesheet sample_data.xml
-
          date   time
 0  01-01-2000  15.24
 1  02-01-2000  51.80
@@ -53,8 +52,7 @@ $ docker run meklenbpo/xml_timesheet sample_data.xml
 6  07-01-2000  36.24
 7  08-01-2000  43.88
 
-$ docker run meklenbpo/xml_timesheet sample_data.xml -s02-01-2000
-
+$ docker run meklenbpo/xml_timesheet sample_data.xml -s04-01-2000
          date   time
 0  04-01-2000  27.86
 1  05-01-2000  29.78
@@ -63,7 +61,6 @@ $ docker run meklenbpo/xml_timesheet sample_data.xml -s02-01-2000
 4  08-01-2000  43.88
 
 $ docker run meklenbpo/xml_timesheet sample_data.xml -e01-01-2000 -n
-
          date    full_name  time
 0  01-01-2000    a.bobrova  1.81
 1  01-01-2000   b.viktorov  3.24
@@ -72,17 +69,23 @@ $ docker run meklenbpo/xml_timesheet sample_data.xml -e01-01-2000 -n
 ```
 
 In order to process one's own timesheet data, one will need to mount a
-local directory into the docker container. For example to query a local file `/path/to/local/file/timesheet.xml` one will need to run the following command:
+local directory into the docker container. For example to query a local file */path/to/local/file/timesheet.xml* one will need to run the following command:
 
 ```
 $ docker run -v /path/to/local/file/:/app/data meklenbpo/xml_timesheet data/timesheet.xml
 ```
 
+Any other arguments can be applied to mounted data files as well:
+```
+$ docker run -v /path/to/local/file/:/app/data meklenbpo/xml_timesheet data/timesheet.xml -s01-01-2000 --end 04-01-2000 --names
+```
 
-### Basic usage
 
-Query time-sheet data for aggregated totals of work time by date. 
-No filtering, no break down by person:
+### Python library
+
+Once all the dependencies (lxml and pandas, see requirements.txt for more details) are in place Clock-In-Clock-Out library can be used by simply importing main module. See the examples below:
+
+#### Basic query, no filtering, no break down by person:
 
 ```python
 import clock_in_clock_out as cc
@@ -103,8 +106,7 @@ results in:
 8  31-12-2018  10.00
 ```
 
-
-### Filtering by date range
+#### Filtering by date range
 
 To enable filtering by date range one of the two arguments must be
 provided:
@@ -130,7 +132,7 @@ results in:
 3  04-01-2000  51.05
 ```
 
-### Break down by employee is enabled:
+#### Break down by employee is enabled:
 
 To enable break down by person optional `names` argument must be set to
 `True` (is `False` by default):
@@ -156,19 +158,13 @@ results in:
 88  31-12-2018    h.simpson  10.00
 ```
 
-## CLI Usage
+### CLI Usage
 
-Command Line Interface is available by running ./app.py:
+Clock-In-Clock-Out can also be run via a Command Line Interface. The standalone script to run is `app.py`. Please see the examples below:
 
 ```
 $ python app.py -h
 
-==================
-Clock-In-Clock-Out
-==================
-
-Time-sheet analysis software
-----------------------------
 usage: app.py [-h] [-s START] [-e END] [-n] xml_filename
 
 Clock-In-Clock-Out: time-sheet analysis
@@ -200,7 +196,17 @@ $ python app.py sample_data.xml -s01-01-2000 -e31-12-2008 -n
 ...
 ```
 
-## Source Format
+## Testing
+
+The app's acceptance test suite is located at: `tests/test_acceptance.py` and features all important use cases of the code base.
+
+The unit tests are located in:
+- `tests/test_unit_clock_in_clock_out.py`
+- `tests/test_unit_generate_xml.py`
+
+## Additional information
+
+### Source data format
 
 An example of source time-sheet XML file:
 
