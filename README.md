@@ -17,6 +17,68 @@ Clock-In-Clock-Out is also available as a CLI tool (see CLI Usage below).
 
 ## Usage
 
+Clock-In-Clock-Out module can be used in three principal ways:
+1. as a Docker container packaged app
+2. as a Python standalone script
+3. as a Python library
+Please see details below:
+
+### Docker usage
+
+Clock-In-Clock-Out Docker container is available from Docker hub at:
+```
+$ docker run meklenbpo/xml_timesheet
+```
+The app has a help system implemented and available at:
+```
+$ docker run meklenbpo/xml_timesheet -h
+```
+The app has 1 positional (required) argument - `xml_filename` - i.e. name of the file to be analyzed and 3 optional arguments:
+- `-s, --start DD-MM-YYY` - start date filter, if specified, the dates before start date will not be taken into account
+- `-e, --end DD-MM-YYYY` - end date filter, if specified, the dates after end date will not be taken into account
+- `-n, --names` - names flag, if specified the app will break down daily totals by person
+
+Docker container includes a sample dataset for testing purposes `sample_data.xml`.
+
+```
+$ docker run meklenbpo/xml_timesheet sample_data.xml
+
+         date   time
+0  01-01-2000  15.24
+1  02-01-2000  51.80
+2  03-01-2000  19.07
+3  04-01-2000  27.86
+4  05-01-2000  29.78
+5  06-01-2000  35.61
+6  07-01-2000  36.24
+7  08-01-2000  43.88
+
+$ docker run meklenbpo/xml_timesheet sample_data.xml -s02-01-2000
+
+         date   time
+0  04-01-2000  27.86
+1  05-01-2000  29.78
+2  06-01-2000  35.61
+3  07-01-2000  36.24
+4  08-01-2000  43.88
+
+$ docker run meklenbpo/xml_timesheet sample_data.xml -e01-01-2000 -n
+
+         date    full_name  time
+0  01-01-2000    a.bobrova  1.81
+1  01-01-2000   b.viktorov  3.24
+2  01-01-2000  f.alekseyev  0.36
+3  01-01-2000     n.razina  9.83
+```
+
+In order to process one's own timesheet data, one will need to mount a
+local directory into the docker container. For example to query a local file `/path/to/local/file/timesheet.xml` one will need to run the following command:
+
+```
+$ docker run -v /path/to/local/file/:/app/data meklenbpo/xml_timesheet data/timesheet.xml
+```
+
+
 ### Basic usage
 
 Query time-sheet data for aggregated totals of work time by date. 
