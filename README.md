@@ -223,11 +223,12 @@ This will generate a new random sample data file *sample_data.xml* with 50 rando
 
 ## Testing
 
-The app's acceptance test suite is located at: `tests/test_acceptance.py` and features all important use cases of the code base.
+The app's acceptance test suite is located at: [tests/test_acceptance.py](tests/test_acceptance.py).
+The acceptance tests demonstrate all important use cases of the code base.
 
 The unit tests are located in:
-- `tests/test_unit_clock_in_clock_out.py`
-- `tests/test_unit_generate_xml.py`
+- [tests/test_unit_clock_in_clock_out.py](tests/test_unit_clock_in_clock_out.py)
+- [tests/test_unit_generate_xml.py](tests/test_unit_generate_xml.py)
 
 ## Additional information
 
