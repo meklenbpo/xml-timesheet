@@ -8,15 +8,15 @@ Clock-In-Clock-Out is a Python library and an application that enables reading t
 
 2. [Usage](#usage)
 
-3. [Docker container app](#docker-usage)
+   [Docker container app](#docker-usage)
 
-4. [Python library](##python)
+   [Python library](#python-library)
 
-5. [Python CLI script](##cli)
+   [Python CLI script](#cli-usage)
 
 6. [Testing](#testing)
 
-7. [Additional information](#additional)
+7. [Additional information](#additional-information)
 
 
 ## Features
